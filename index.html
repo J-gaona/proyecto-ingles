@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Food Market - El sistema de comida inteligente que alimenta tu hogar</title>
+    <!-- Google Fonts for Modern Typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Top Global Header / Navigation -->
+    <header class="app-header">
+        <div class="header-container">
+            <!-- REQUERIMIENTO 3: Mascota (image.png) en el menú principal acompañando al título -->
+            <div class="brand" onclick="navigateTo('welcome')" title="Go to Smart Food Market Home">
+                <div class="brand-logo-container">
+                    <img src="image.png" alt="Smart Food Market Detective Mascot" class="brand-logo-img">
+                </div>
+                <div class="brand-text">
+                    <h1>Smart Food Market</h1>
+                    <!-- ESLOGAN EXACTO -->
+                    <span class="tagline">El sistema de comida inteligente que alimenta tu hogar</span>
+                </div>
+            </div>
+
+            <nav class="nav-menu">
+                <button class="nav-btn active" data-section="welcome" onclick="navigateTo('welcome')">
+                    <span class="nav-icon">🏠</span> Home
+                </button>
+                <button class="nav-btn" data-section="catalog" onclick="navigateTo('catalog')">
+                    <span class="nav-icon">🧺</span> Catalog
+                </button>
+                <button class="nav-btn" data-section="availability" onclick="navigateTo('availability')">
+                    <span class="nav-icon">📊</span> Availability
+                </button>
+                <button class="nav-btn" data-section="quantity" onclick="navigateTo('quantity')">
+                    <span class="nav-icon">⚖️</span> Quantity
+                </button>
+                <button class="nav-btn cart-nav-btn" data-section="summary" onclick="navigateTo('summary')">
+                    <span class="nav-icon">🛒</span> Cart
+                    <span class="cart-badge" id="cartBadge">0</span>
+                </button>
+                <!-- REQUERIMIENTO 1: Vistas de Login y Registro accesibles en el menú -->
+                <button class="nav-btn" data-section="login" onclick="navigateTo('login')">
+                    <span class="nav-icon">🔑</span> Sign In
+                </button>
+                <button class="nav-btn" data-section="register" onclick="navigateTo('register')">
+                    <span class="nav-icon">✨</span> Sign Up
+                </button>
+            </nav>
+
+            <div class="header-actions">
+                <button class="grammar-toggle-btn" onclick="toggleGrammarModal()" title="View Grammar & Vocabulary Checklist">
+                    <span>📚</span> Grammar Rules
+                </button>
+                <button class="chat-open-btn" onclick="toggleChatWidget()" title="Open Smart Assistant">
+                    <img src="image.png" alt="Bot Icon" class="btn-mascot-tiny">
+                    <span>Customer Chat</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Container (SPA Views) -->
+    <main class="app-main">
+
+        <!-- ==============================================
+             SECTION 1: WELCOME SCREEN (HOME)
+             ============================================== -->
+        <section id="welcome" class="spa-section active">
+            <div class="hero-card">
+                <div class="hero-layout">
+                    <div class="hero-content">
+                        <span class="badge-pill">🍃 Smart Inventory System</span>
+                        <h2 class="hero-title">Welcome to Smart Food Market</h2>
+                        
+                        <!-- REQUERIMIENTO 1: ESLOGAN EXACTO EN WELCOME SCREEN -->
+                        <div class="slogan-badge-wrap">
+                            <span class="slogan-lead">🌱 "El sistema de comida inteligente que alimenta tu hogar"</span>
+                        </div>
+
+                        <!-- GRAMMAR REQUIREMENT: How many...? -->
+                        <p class="hero-question"><strong>How many items do you want to add to your pantry today?</strong></p>
+                        
+                        <p class="hero-description">
+                            Guided by <strong>Detective Apple</strong>, our smart inventory assistant, we ensure guaranteed grocery availability. 
+                            Choose exact units for countable goods and liters or grams for bulk staples.
+                        </p>
+                        
+                        <!-- GRAMMAR REQUIREMENT: Affirmative sentence with 'some' -->
+                        <div class="live-notice-alert">
+                            <span class="notice-icon">✨</span>
+                            <span><strong>Daily Store Update:</strong> We still have some fresh milk and cheese ready for dispatch in our refrigerated section!</span>
+                        </div>
+
+                        <div class="hero-cta-group">
+                            <button class="btn btn-primary btn-lg" onclick="navigateTo('catalog')">
+                                <span>🔍</span> Explore Catalog
+                            </button>
+                            <button class="btn btn-outline btn-lg" onclick="navigateTo('availability')">
+                                <span>📈</span> Check Live Availability
+                            </button>
+                            <button class="btn btn-secondary btn-lg" onclick="navigateTo('login')">
+                                <span>🔑</span> Access Account
+                            </button>
+                            <button class="btn btn-chat btn-lg" onclick="openChatAndGreet()">
+                                <img src="image.png" alt="Detective Apple" class="btn-mascot-tiny">
+                                <span>Ask Detective Bot</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Hero Mascot Spotlight Card -->
+                    <div class="hero-mascot-card">
+                        <div class="hero-mascot-glow">
+                            <img src="image.png" alt="Detective Apple - Smart Food Market Mascot" class="mascot-hero-avatar">
+                        </div>
+                        <div class="hero-mascot-caption">
+                            <h4>Detective Apple</h4>
+                            <p>Chief of Stock Intelligence</p>
+                            <span class="mascot-speech-bubble">"I inspect every pantry shelf so you never encounter surprise shortages!"</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="hero-features">
+                    <div class="feature-card">
+                        <div class="feature-icon">📦</div>
+                        <h4>Exact Quantities</h4>
+                        <p>Order countable goods in units and uncountable items in liters or grams.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">⚡</div>
+                        <h4>Zero Waste Stock</h4>
+                        <p>Instant alerts when stock is exhausted so you never pay for missing goods.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🕵️‍♂️</div>
+                        <h4>Detective Assistance</h4>
+                        <p>Our mascot bot verifies live stock in natural, grammatically flawless English.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Inventory Snapshot Banner -->
+            <div class="snapshot-banner">
+                <div class="snapshot-header">
+                    <h3>Today's Market Highlights</h3>
+                    <!-- GRAMMAR REQUIREMENT: Sentence with 'a lot of' -->
+                    <p class="snapshot-sub">We currently have a lot of cookies and fresh eggs on sale, but hurry because stock fluctuates quickly!</p>
+                </div>
+                <div class="snapshot-grid" id="quickSnapshotGrid">
+                    <!-- Populated dynamically via JS -->
+                </div>
+            </div>
+        </section>
+
+        <!-- ==============================================
+             SECTION: LOGIN (INICIAR SESIÓN)
+             ============================================== -->
+        <section id="login" class="spa-section">
+            <div class="auth-wrapper">
+                <div class="auth-card">
+                    <!-- Mascot Hero Header -->
+                    <div class="mascot-auth-header">
+                        <div class="mascot-frame">
+                            <img src="image.png" alt="Smart Food Market Mascot" class="mascot-auth-img">
+                            <span class="mascot-status-dot" title="Detective Apple is Online"></span>
+                        </div>
+                        <h2 class="auth-title">Smart Food Market</h2>
+                        <!-- ESLOGAN EXACTO -->
+                        <p class="auth-slogan">"El sistema de comida inteligente que alimenta tu hogar"</p>
+                        
+                        <div class="mascot-dialogue-box">
+                            <span class="detective-badge">🕵️‍♂️ Detective Apple says:</span>
+                            <p>"Welcome back, food lover! Enter your credentials to review your smart shopping list and live pantry inventory."</p>
+                        </div>
+                    </div>
+
+                    <!-- Login Form -->
+                    <form class="auth-form" onsubmit="handleLoginSubmit(event)">
+                        <div class="form-group">
+                            <label for="loginEmail">Email Address or Username</label>
+                            <div class="input-with-icon">
+                                <span class="input-icon">✉️</span>
+                                <input type="email" id="loginEmail" class="form-input" placeholder="e.g. detective.shopper@market.com" required value="shopper@smartmarket.com">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="loginPassword">Password</label>
+                            <div class="input-with-icon">
+                                <span class="input-icon">🔒</span>
+                                <input type="password" id="loginPassword" class="form-input" placeholder="••••••••" required value="password123">
+                            </div>
+                        </div>
+
+                        <div class="auth-options-row">
+                            <label class="remember-label">
+                                <input type="checkbox" id="rememberMe" checked> Remember this device
+                            </label>
+                            <a href="#" class="auth-link-subtle" onclick="showToast('Password recovery demo: Use your existing password!', 'info'); return false;">Forgot password?</a>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary btn-block btn-lg">
+                            <span>🚀</span> Sign In to My Account
+                        </button>
+                    </form>
+
+                    <div class="auth-footer-switch">
+                        <p>Don't have a Smart Food Market account yet?</p>
+                        <button class="btn btn-outline btn-sm" onclick="navigateTo('register')">
+                            Create New Account (Sign Up)
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==============================================
+             SECTION: REGISTER (REGISTRARSE)
+             ============================================== -->
+        <section id="register" class="spa-section">
+            <div class="auth-wrapper">
+                <div class="auth-card">
+                    <!-- Mascot Hero Header -->
+                    <div class="mascot-auth-header">
+                        <div class="mascot-frame">
+                            <img src="image.png" alt="Smart Food Market Mascot" class="mascot-auth-img">
+                            <span class="mascot-badge-tag">New Shopper</span>
+                        </div>
+                        <h2 class="auth-title">Smart Food Market</h2>
+                        <!-- ESLOGAN EXACTO -->
+                        <p class="auth-slogan">"El sistema de comida inteligente que alimenta tu hogar"</p>
+
+                        <div class="mascot-dialogue-box">
+                            <span class="detective-badge">🍎 Detective Apple welcomes you:</span>
+                            <p>"Join our community! Experience real-time pantry tracking, smart countable & uncountable recipes, and zero-waste shopping."</p>
+                        </div>
+                    </div>
+
+                    <!-- Register Form -->
+                    <form class="auth-form" onsubmit="handleRegisterSubmit(event)">
+                        <div class="form-group">
+                            <label for="regFullName">Full Name</label>
+                            <div class="input-with-icon">
+                                <span class="input-icon">👤</span>
+                                <input type="text" id="regFullName" class="form-input" placeholder="e.g. Sherlock Holmes" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="regEmail">Email Address</label>
+                            <div class="input-with-icon">
+                                <span class="input-icon">✉️</span>
+                                <input type="email" id="regEmail" class="form-input" placeholder="name@domain.com" required>
+                            </div>
+                        </div>
+
+                        <div class="form-grid-2">
+                            <div class="form-group">
+                                <label for="regPassword">Create Password</label>
+                                <div class="input-with-icon">
+                                    <span class="input-icon">🔒</span>
+                                    <input type="password" id="regPassword" class="form-input" placeholder="Min. 8 characters" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="regConfirmPassword">Confirm Password</label>
+                                <div class="input-with-icon">
+                                    <span class="input-icon">🔐</span>
+                                    <input type="password" id="regConfirmPassword" class="form-input" placeholder="Repeat password" required>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="auth-options-row">
+                            <label class="remember-label">
+                                <input type="checkbox" id="termsAccepted" required checked>
+                                I accept the fresh stock guarantee & privacy terms
+                            </label>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary btn-block btn-lg">
+                            <span>✨</span> Register & Start Shopping
+                        </button>
+                    </form>
+
+                    <div class="auth-footer-switch">
+                        <p>Already registered with us?</p>
+                        <button class="btn btn-outline btn-sm" onclick="navigateTo('login')">
+                            Sign In to Existing Account
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==============================================
+             SECTION 2: CATALOG
+             ============================================== -->
+        <section id="catalog" class="spa-section">
+            <div class="section-header">
+                <div>
+                    <span class="badge-pill">🥑 Fresh Selection</span>
+                    <h2>Product Catalog</h2>
+                    <p class="section-subtitle">Browse through our verified stock of 10 essential grocery products.</p>
+                </div>
+                <div class="catalog-filters">
+                    <button class="filter-btn active" onclick="filterCatalog('all', this)">All Items (10)</button>
+                    <button class="filter-btn" onclick="filterCatalog('countable', this)">Countable Nouns</button>
+                    <button class="filter-btn" onclick="filterCatalog('uncountable', this)">Uncountable Nouns</button>
+                    <button class="filter-btn" onclick="filterCatalog('in-stock', this)">In Stock Only</button>
+                </div>
+            </div>
+
+            <!-- Dynamic Product Grid -->
+            <div class="catalog-grid" id="catalogGrid">
+                <!-- Injected by JavaScript -->
+            </div>
+        </section>
+
+        <!-- ==============================================
+             SECTION 3: AVAILABILITY
+             ============================================== -->
+        <section id="availability" class="spa-section">
+            <div class="section-header">
+                <div>
+                    <span class="badge-pill">📊 Real-Time Inventory Status</span>
+                    <h2>Stock & Availability Monitor</h2>
+                    <!-- GRAMMAR REQUIREMENT: How much...? -->
+                    <p class="section-subtitle">Wondering <strong>how much rice is left in the warehouse</strong> or what is ready to ship? Review live storage below.</p>
+                </div>
+                <div class="status-summary-chips" id="statusSummaryChips">
+                    <!-- Dynamic summary count badges -->
+                </div>
+            </div>
+
+            <!-- Prominent Alerts with Grammatical Requirements -->
+            <div class="grammar-announcements">
+                <!-- GRAMMAR REQUIREMENT: Negative sentence with 'any' -->
+                <div class="alert-box alert-danger">
+                    <span class="alert-icon">⚠️</span>
+                    <div class="alert-body">
+                        <strong>Out of Stock Notice:</strong> Sorry, we don't have any bread left in our store today! Our bakers will restock tomorrow morning.
+                    </div>
+                </div>
+
+                <!-- GRAMMAR REQUIREMENT: Sentence with 'a few' & 'a little' -->
+                <div class="alert-box alert-warning">
+                    <span class="alert-icon">⏳</span>
+                    <div class="alert-body">
+                        <strong>Low Stock Warning:</strong> Hurry up! There are only a few bananas remaining in our crates, and we have a little orange juice left in the fridge.
+                    </div>
+                </div>
+
+                <!-- GRAMMAR REQUIREMENT: Sentence with 'many' and 'much' -->
+                <div class="alert-box alert-info">
+                    <span class="alert-icon">ℹ️</span>
+                    <div class="alert-body">
+                        <strong>Inventory Observation:</strong> There are not many bananas remaining, and there is not much orange juice left in storage, but we have plenty of farm eggs!
+                    </div>
+                </div>
+            </div>
+
+            <!-- Availability Table / Cards -->
+            <div class="availability-card">
+                <div class="availability-table-responsive">
+                    <table class="availability-table">
+                        <thead>
+                            <tr>
+                                <th>Product</th>
+                                <th>Grammar Classification</th>
+                                <th>Measurement Unit</th>
+                                <th>Available Stock</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="availabilityTableBody">
+                            <!-- Populated dynamically via JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==============================================
+             SECTION 4: QUANTITY SELECTION
+             ============================================== -->
+        <section id="quantity" class="spa-section">
+            <div class="section-header">
+                <div>
+                    <span class="badge-pill">⚖️ Intelligent Quantity Selector</span>
+                    <h2>Select Your Desired Quantity</h2>
+                    <p class="section-subtitle">Our smart controls adapt automatically: count units for discrete foods or measure liters and grams for bulk staples.</p>
+                </div>
+            </div>
+
+            <div class="quantity-container">
+                <!-- Item Selector dropdown / thumbnail picker -->
+                <div class="quantity-item-picker">
+                    <label for="quantityProductSelect" class="picker-label">Choose an item to configure:</label>
+                    <select id="quantityProductSelect" class="form-select" onchange="loadProductIntoQuantityView(this.value)">
+                        <!-- Populated by JavaScript -->
+                    </select>
+                </div>
+
+                <!-- Active Product Detail Card with Dynamic Question -->
+                <div class="quantity-card" id="quantityCard">
+                    <!-- Dynamic Interactive Content loaded by JS -->
+                </div>
+            </div>
+        </section>
+
+        <!-- ==============================================
+             SECTION 5: ORDER SUMMARY
+             ============================================== -->
+        <section id="summary" class="spa-section">
+            <div class="section-header">
+                <div>
+                    <span class="badge-pill">🛍️ Cart & Checkout</span>
+                    <h2>Order Summary</h2>
+                    <!-- GRAMMAR REQUIREMENT: How much...? -->
+                    <p class="section-subtitle">Review your basket: <strong>How much will your fresh grocery delivery cost?</strong></p>
+                </div>
+                <div class="cart-actions-top">
+                    <button class="btn btn-outline btn-sm" onclick="clearCart()">🗑️ Empty Basket</button>
+                    <button class="btn btn-secondary btn-sm" onclick="navigateTo('catalog')">➕ Add More Groceries</button>
+                </div>
+            </div>
+
+            <!-- Grammatical banner in cart -->
+            <div class="cart-guidance-banner">
+                <!-- GRAMMAR REQUIREMENT: Affirmative sentence with 'some' -->
+                <p>🛒 <strong>Cart Status:</strong> You have added some delicious items to your shopping cart. Please double-check quantities before dispatch.</p>
+                <!-- GRAMMAR REQUIREMENT: Interrogative sentence with 'any' -->
+                <p>❓ <strong>Final Inquiries:</strong> Do you need any additional groceries before checking out?</p>
+            </div>
+
+            <div class="summary-layout">
+                <!-- Left: Items in Cart -->
+                <div class="cart-items-panel">
+                    <div class="card-box">
+                        <h3>Your Selected Groceries</h3>
+                        <div id="cartItemsList" class="cart-items-list">
+                            <!-- Injected dynamically via JS -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right: Checkout & Price Calculation -->
+                <div class="cart-checkout-panel">
+                    <div class="card-box invoice-box">
+                        <h3>Payment & Delivery Summary</h3>
+
+                        <div class="summary-row">
+                            <span>Subtotal:</span>
+                            <span id="summarySubtotal">$0.00</span>
+                        </div>
+                        <div class="summary-row">
+                            <span>Eco-friendly Packing:</span>
+                            <span id="summaryPacking">$1.50</span>
+                        </div>
+                        <div class="summary-row">
+                            <span>Local Green Courier:</span>
+                            <span id="summaryShipping">FREE</span>
+                        </div>
+                        <hr class="divider">
+                        <div class="summary-row total-row">
+                            <span>Total Price:</span>
+                            <span id="summaryTotal">$0.00</span>
+                        </div>
+
+                        <!-- Special Question in Checkout -->
+                        <div class="packing-question-box">
+                            <!-- GRAMMAR REQUIREMENT: How many...? -->
+                            <label for="bagCountSelect" class="bag-label">
+                                <strong>How many eco-friendly bags do you need for this order?</strong>
+                            </label>
+                            <select id="bagCountSelect" class="form-select form-select-sm">
+                                <option value="1">1 Compostable Bag</option>
+                                <option value="2" selected>2 Compostable Bags</option>
+                                <option value="3">3 Compostable Bags</option>
+                                <option value="4">4 Compostable Bags</option>
+                            </select>
+                        </div>
+
+                        <div class="checkout-button-group">
+                            <button class="btn btn-primary btn-block btn-lg" id="checkoutBtn" onclick="processOrderCheckout()">
+                                🚀 Confirm & Place Order
+                            </button>
+                        </div>
+
+                        <div class="guarantee-box">
+                            <img src="image.png" alt="Detective Mascot" class="btn-mascot-tiny">
+                            <span>Guaranteed Freshness & Stock Integrity Verified by Detective Apple</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ==============================================
+         REQUERIMIENTO 2: SIMULATED CUSTOMER CHAT MODULE
+         (Cada mensaje del bot incluye image.png como avatar)
+         ============================================== -->
+    <div class="chat-widget" id="chatWidget">
+        <div class="chat-header">
+            <div class="chat-header-info">
+                <!-- Mascota en el encabezado del chat -->
+                <div class="chat-avatar-frame">
+                    <img src="image.png" alt="Detective Apple Avatar" class="chat-mascot-header-img">
+                    <span class="avatar-online-dot"></span>
+                </div>
+                <div>
+                    <h4>Detective Apple Bot</h4>
+                    <span class="status-online"><span class="dot"></span> Online • Inventory Connected</span>
+                </div>
+            </div>
+            <div class="chat-header-actions">
+                <button class="chat-minimize-btn" onclick="toggleChatWidget()" title="Close Chat">✕</button>
+            </div>
+        </div>
+
+        <div class="chat-body" id="chatBody">
+            <!-- Initial greeting with bot avatar (image.png) -->
+            <div class="chat-message bot">
+                <img src="image.png" alt="Detective Apple Avatar" class="bot-msg-avatar">
+                <div class="msg-bubble-wrap">
+                    <span class="msg-sender-tag">Detective Apple</span>
+                    <div class="msg-bubble">
+                        Hello! I'm Detective Apple, your Smart Food Market Assistant. 
+                        Ask me anything about our live grocery inventory and stock availability!
+                    </div>
+                    <span class="msg-time">Just now</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quick Question Buttons for User Interaction -->
+        <div class="chat-quick-actions">
+            <span class="quick-title">Quick Detective Inquiries:</span>
+            <div class="quick-btn-scroll" id="chatQuickButtons">
+                <!-- Dynamically populated via JS -->
+            </div>
+        </div>
+
+        <div class="chat-footer">
+            <input type="text" id="chatCustomInput" placeholder="Type an item (e.g. bread, milk, apples)..." onkeypress="handleChatEnter(event)">
+            <button class="chat-send-btn" onclick="sendCustomChatMessage()">Send</button>
+        </div>
+    </div>
+
+    <!-- Floating Chat Trigger Button (Bottom Right con avatar de la mascota) -->
+    <button class="floating-chat-trigger" onclick="toggleChatWidget()" id="floatingChatBtn" title="Chat with Detective Apple">
+        <img src="image.png" alt="Detective Mascot" class="floating-mascot-img">
+        <span class="floating-label">Ask Detective</span>
+    </button>
+
+    <!-- ==============================================
+         ORDER CONFIRMATION MODAL
+         ============================================== -->
+    <div class="modal-overlay" id="orderModal">
+        <div class="modal-card">
+            <div class="modal-header">
+                <img src="image.png" alt="Detective Mascot" class="modal-mascot-mini">
+                <h3>Order Confirmed Successfully!</h3>
+            </div>
+            <div class="modal-body" id="orderModalBody">
+                <!-- Injected dynamically -->
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" onclick="closeOrderModal()">Start a New Order</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==============================================
+         GRAMMAR & REQUIREMENTS REFERENCE MODAL
+         ============================================== -->
+    <div class="modal-overlay" id="grammarModal">
+        <div class="modal-card modal-large">
+            <div class="modal-header">
+                <span class="modal-icon-info">📖</span>
+                <h3>Grammar & Linguistic Integration Reference</h3>
+                <button class="close-modal-x" onclick="toggleGrammarModal()">✕</button>
+            </div>
+            <div class="modal-body">
+                <p>This prototype demonstrates how grammatical rules (countable vs. uncountable nouns) enhance UX logic and inventory clarity:</p>
+
+                <div class="grammar-checklist-grid">
+                    <div class="grammar-item">
+                        <span class="check-tag">✓ 3x "How many...?"</span>
+                        <ul>
+                            <li><strong>Welcome:</strong> "How many items do you want to add to your pantry today?"</li>
+                            <li><strong>Quantity:</strong> "How many [Apples/Bananas/Eggs...] would you like to buy?"</li>
+                            <li><strong>Checkout:</strong> "How many eco-friendly bags do you need for this order?"</li>
+                        </ul>
+                    </div>
+                    <div class="grammar-item">
+                        <span class="check-tag">✓ 3x "How much...?"</span>
+                        <ul>
+                            <li><strong>Quantity:</strong> "How much [Milk/Rice/Cheese...] do you need for your recipe?"</li>
+                            <li><strong>Availability:</strong> "...how much rice is left in the warehouse..."</li>
+                            <li><strong>Order Summary:</strong> "How much will your fresh grocery delivery cost?"</li>
+                        </ul>
+                    </div>
+                    <div class="grammar-item">
+                        <span class="check-tag">✓ 2x Affirmative "some"</span>
+                        <ul>
+                            <li><strong>Hero Notice:</strong> "We still have some fresh milk and cheese ready for dispatch..."</li>
+                            <li><strong>Cart Status:</strong> "You have added some delicious items to your shopping cart."</li>
+                        </ul>
+                    </div>
+                    <div class="grammar-item">
+                        <span class="check-tag">✓ 2x "any" (Negative / Interrogative)</span>
+                        <ul>
+                            <li><strong>Negative:</strong> "Sorry, we don't have any bread left in our store today!"</li>
+                            <li><strong>Interrogative:</strong> "Do you need any additional groceries before checking out?"</li>
+                        </ul>
+                    </div>
+                    <div class="grammar-item">
+                        <span class="check-tag">✓ 2x "a lot of", "much" or "many"</span>
+                        <ul>
+                            <li><strong>Snapshot Notice:</strong> "We currently have a lot of cookies and fresh eggs on sale..."</li>
+                            <li><strong>Stock Analysis:</strong> "There are not many bananas remaining, and there is not much orange juice left..."</li>
+                        </ul>
+                    </div>
+                    <div class="grammar-item">
+                        <span class="check-tag">✓ 2x "a little" or "a few"</span>
+                        <ul>
+                            <li><strong>Availability Alert:</strong> "There are only a few bananas remaining in our crates..."</li>
+                            <li><strong>Availability Alert & Chat:</strong> "...we have a little orange juice left in the fridge."</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="toggleGrammarModal()">Close Guide</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification Container -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <!-- Application Script -->
+    <script src="app.js"></script>
+</body>
+</html>
